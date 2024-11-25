@@ -8,7 +8,7 @@ import {
   useEditorStore
 } from '@/store'
 import ws from '@/connect'
-import { ServePublishMessage } from '@/api/chat'
+// import { ServePublishMessage } from '@/api/chat'
 import { ServeGroupVoteCreate } from '@/api/group'
 import { throttle } from '@/utils/common'
 import { getVideoImage } from '@/utils/file'
@@ -59,8 +59,12 @@ const onSendMessage = async (data = {}, callBack: any) => {
     to_from_id: props.toFromId
   }
 
-  const { code } = await toApi(ServePublishMessage, params)
-  callBack(code == 200)
+  // 使用 WebSocket 发送消息
+  ws.emit('im.message', params)
+
+  // 模拟消息发送成功的回调处理，WebSocket通常没有直接返回结果，
+  // 成功与否可以在回调中进一步监听
+  callBack(true) // 假设发送成功
 }
 
 // 发送文本消息
