@@ -56,11 +56,11 @@ const onSendMessage = async (data = {}, callBack: any) => {
   const params = {
     ...data,
     talk_mode: props.talkMode,
-    to_from_id: props.toFromId
+    conversation_id: props.toFromId
   }
 
   // 使用 WebSocket 发送消息
-  ws.emit('im.message', params)
+  ws.emit('private', params)
 
   // 模拟消息发送成功的回调处理，WebSocket通常没有直接返回结果，
   // 成功与否可以在回调中进一步监听

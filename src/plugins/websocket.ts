@@ -153,7 +153,11 @@ class WsSocket {
 
   emit(event: string, payload: any): void {
     if (this.connect && this.connect.readyState === WebSocket.OPEN) {
-      this.connect.send(JSON.stringify({ event, payload }))
+      const message = {
+        chat_type: event,
+        data: payload,
+      }
+      this.connect.send(JSON.stringify({ message }))
     } else {
       console.error('WebSocket connection closed...', this.connect)
     }
