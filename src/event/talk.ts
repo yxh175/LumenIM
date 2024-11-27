@@ -19,14 +19,14 @@ class Talk extends Base {
   body: any
 
   /**
-   * 接收者ID
+   * 会话ID
    */
-  to_from_id: number = 0
+  conversation_id: number = 0
 
   /**
    * 发送者ID
    */
-  from_id: number = 0
+  sender_id: number = 0
 
   /**
    * 聊天类型[1:私聊;2:群聊;]
@@ -41,9 +41,9 @@ class Talk extends Base {
   constructor(data: any) {
     super()
 
-    const { to_from_id, from_id, talk_mode, body } = data
+    const { conversation_id, sender_id, talk_mode, body } = data
 
-    Object.assign(this, { from_id, to_from_id, talk_mode, body })
+    Object.assign(this, { sender_id, conversation_id, talk_mode, body })
 
     this.handle()
   }
@@ -53,7 +53,7 @@ class Talk extends Base {
    * @returns
    */
   isCurrSender(): boolean {
-    return this.from_id == this.getAccountId()
+    return this.sender_id == this.getAccountId()
   }
 
   /**
@@ -62,7 +62,7 @@ class Talk extends Base {
    * @return String
    */
   getIndexName(): string {
-    return `${this.talk_mode}_${this.to_from_id}`
+    return `${this.talk_mode}_${this.conversation_id}`
   }
 
   /**
@@ -94,9 +94,10 @@ class Talk extends Base {
     if (findIndex == -1) {
       return this.addTalkItem()
     }
+    console.log(this.body, this.conversation_id, this.sender_id)
 
     // 判断当前是否正在和好友对话
-    if (this.isTalk(this.talk_mode, this.to_from_id)) {
+    if (this.isTalk(this.talk_mode, this.conversation_id)) {
       this.insertTalkRecord()
 
       if (useSettingsStore().isLeaveWeb) {
@@ -131,7 +132,7 @@ class Talk extends Base {
   async addTalkItem() {
     const { code, data } = await toApi(ServeCreateTalk, {
       talk_mode: this.talk_mode,
-      to_from_id: this.to_from_id
+      conversation_id: this.conversation_id
     })
 
     if (code !== 200) return
@@ -161,10 +162,10 @@ class Talk extends Base {
       this.isCurrSender()
     )
 
-    if (this.getAccountId() !== this.from_id) {
+    if (this.getAccountId() !== this.sender_id) {
       ServeClearTalkUnreadNum({
         talk_mode: this.talk_mode,
-        to_from_id: this.to_from_id
+        conversation_id: this.conversation_id
       })
     }
 
@@ -203,7 +204,7 @@ class Talk extends Base {
         msg_text: this.getTalkText(),
         updated_at: parseTime(new Date()) as string
       },
-      this.isCurrSender() || this.to_from_id == this.getAccountId()
+      this.isCurrSender() || this.conversation_id == this.getAccountId()
     )
   }
 }
