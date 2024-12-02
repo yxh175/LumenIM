@@ -60,7 +60,7 @@ const onSendMessage = async (data = {}, callBack: any) => {
   }
 
   // 使用 WebSocket 发送消息
-  ws.emit('private', params)
+  ws.emit('im.message', params)
 
   // 模拟消息发送成功的回调处理，WebSocket通常没有直接返回结果，
   // 成功与否可以在回调中进一步监听

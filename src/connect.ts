@@ -79,7 +79,7 @@ class Connect {
   }
 
   onImMessage() {
-    this.conn.on('private', (data: any) => new EventTalk(data))
+    this.conn.on('im.message', (data: any) => new EventTalk(data))
   }
 
   onImContactStatus() {
