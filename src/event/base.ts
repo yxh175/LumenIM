@@ -10,11 +10,11 @@ class Base {
   /**
    * 获取当前登录用户的ID
    */
-  getAccountId(): number {
+  getAccountId(): any { 
     return useUserStore().uid
   }
 
-  getTalkParams(): { talk_type: number; receiver_id: number; index_name: string } {
+  getTalkParams(): { talk_type: number; receiver_id: any; index_name: string } {
     const dialogueStore = useDialogueStore()
 
     const { talk_type, receiver_id } = dialogueStore.talk
@@ -32,7 +32,7 @@ class Base {
    * @param {Number} talk_mode 聊天消息类型[1:私信;2:群聊;]
    * @param {Number} to_from_id 发送者ID
    */
-  isTalk(talk_mode: number, to_from_id: number): boolean {
+  isTalk(talk_mode: number, to_from_id: string): boolean {
     const params = this.getTalkParams()
 
     return params.receiver_id == to_from_id && talk_mode == params.talk_type

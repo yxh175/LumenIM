@@ -7,7 +7,7 @@ import * as auth from '@/utils/auth'
 import { storage } from '@/utils'
 
 interface IUserStoreState {
-  uid: number
+  uid: any
   nickname: string
   mobile: string
   email: string
@@ -25,7 +25,7 @@ export const useUserStore = defineStore('user', {
   persist: true,
   state: (): IUserStoreState => {
     return {
-      uid: 0, // 用户ID
+      uid: '', // 用户ID
       mobile: '',
       email: '',
       nickname: '', // 用户昵称
@@ -73,6 +73,7 @@ export const useUserStore = defineStore('user', {
         this.isQiye = data.user_info.is_qiye || false
 
         storage.set('user_info', data)
+        console.log(this.uid)
       }
     },
     async loadFriendApplyNum() {

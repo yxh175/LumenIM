@@ -21,12 +21,12 @@ class Talk extends Base {
   /**
    * 会话ID
    */
-  conversation_id: number = 0
+  conversation_id: string = ''
 
   /**
    * 发送者ID
    */
-  sender_id: number = 0
+  sender_id: string = ''
 
   /**
    * 聊天类型[1:私聊;2:群聊;]
@@ -132,7 +132,7 @@ class Talk extends Base {
   async addTalkItem() {
     const { code, data } = await toApi(ServeCreateTalk, {
       talk_mode: this.talk_mode,
-      conversation_id: this.conversation_id
+      to_from_id: this.conversation_id
     })
 
     if (code !== 200) return
