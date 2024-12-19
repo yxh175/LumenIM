@@ -75,7 +75,7 @@ const onSendTextEvent = throttle((value: any) => {
     type: 'text',
     quote_id: data.quoteId,
     body: {
-      text: data.items[0].content,
+      content: data.items[0].content,
       mentions: data.mentionUids
     }
   }
