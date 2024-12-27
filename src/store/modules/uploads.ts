@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { ServeFindFileSplitInfo, ServeFileSubareaUpload } from '@/api/upload'
-import { ServePublishMessage } from '@/api/chat'
+// import { ServePublishMessage } from '@/api/chat'
 import { toApi } from '@/api'
+import ws from '@/connect'
 
 // 处理拆分上传文件
 function fileSlice(file: File, uploadId: string, eachSize: number) {
@@ -104,12 +105,14 @@ export const useUploadsStore = defineStore('uploads', {
 
     // 发送上传消息
     sendUploadMessage(item: any) {
-      ServePublishMessage({
+      const params = {
         type: 'file',
         talk_mode: item.talk_type,
-        to_from_id: item.receiver_id,
+        conversation_id: item.receiver_id,
         body: { upload_id: item.upload_id }
-      })
+      }
+      // 使用 WebSocket 发送消息
+      ws.emit('im.message', params)
     }
   }
 })
