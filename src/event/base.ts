@@ -17,11 +17,11 @@ class Base {
   getTalkParams(): { talk_type: number; receiver_id: any; index_name: string } {
     const dialogueStore = useDialogueStore()
 
-    const { talk_type, receiver_id } = dialogueStore.talk
+    const { talk_mode, to_from_id } = dialogueStore.target
 
     return {
-      talk_type,
-      receiver_id,
+      talk_mode,
+      to_from_id,
       index_name: dialogueStore.index_name
     }
   }
@@ -35,7 +35,7 @@ class Base {
   isTalk(talk_mode: number, to_from_id: string): boolean {
     const params = this.getTalkParams()
 
-    return params.receiver_id == to_from_id && talk_mode == params.talk_type
+    return params.to_from_id == to_from_id && talk_mode == params.talk_mode
   }
 
   /**

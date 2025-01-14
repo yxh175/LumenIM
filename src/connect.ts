@@ -1,11 +1,9 @@
-import { h } from 'vue'
 import { NAvatar } from 'naive-ui'
 import { useTalkStore, useUserStore } from '@/store'
 import { notifyIcon } from '@/constant/default'
 import WsSocket from './plugins/websocket'
 import EventTalk from './event/talk'
 import EventKeyboard from './event/keyboard'
-import EventLogin from './event/login'
 import EventRevoke from './event/revoke'
 import { getToken, isLogin } from './utils/auth'
 
@@ -57,7 +55,6 @@ class Connect {
     this.onPing()
     this.onPong()
     this.onImMessage()
-    this.onImContactStatus()
     this.onImMessageKeyboard()
     this.onImMessageRevoke()
     this.onImContactApply()
@@ -80,10 +77,6 @@ class Connect {
 
   onImMessage() {
     this.conn.on('im.message', (data: any) => new EventTalk(data))
-  }
-
-  onImContactStatus() {
-    this.conn.on('im.contact.status', (data: any) => new EventLogin(data))
   }
 
   onImMessageKeyboard() {

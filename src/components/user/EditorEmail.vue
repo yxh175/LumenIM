@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { NModal, NForm, NFormItem, NInput } from 'naive-ui'
 import { ServeUpdateEmail } from '@/api/user'
 import { toApi } from '@/api'
 import SmsLock from '@/plugins/sms-lock'
 import { ServeSendEmailCode } from '@/api/common'
+import { rsaEncrypt } from '@/utils/rsa'
 
 const model = defineModel({ default: false })
 const emit = defineEmits(['success'])
@@ -57,7 +56,13 @@ const onSendEmail = async () => {
 }
 
 const onSubmit = async () => {
-  await toApi(ServeUpdateEmail, state, {
+  const params = {
+    email: state.email,
+    code: state.code,
+    password: rsaEncrypt(state.password)
+  }
+
+  await toApi(ServeUpdateEmail, params, {
     loading,
     showMessageText: '邮箱修改成功',
     onSuccess: () => {

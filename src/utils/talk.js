@@ -36,7 +36,6 @@ export function formatTalkItem(params) {
     avatar: '',
     is_disturb: 2,
     is_top: 2,
-    is_online: 2,
     is_robot: 2,
     unread_num: 0,
     content: '...',

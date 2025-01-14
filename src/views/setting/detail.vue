@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { NForm, NFormItem, NInput, NDatePicker, NRadio, NRadioGroup, NSpace } from 'naive-ui'
 import { ServeUpdateUserDetail, ServeGetUserDetail } from '@/api/user'
 import { toApi } from '@/api'
-import AvatarCropper from '@/components/base/AvatarCropper.vue'
+import AvatarCropper from '@/components/basic/AvatarCropper.vue'
 import { hidePhone } from '@/utils/string'
 import { useInject } from '@/hooks'
 import { useUserStore } from '@/store'

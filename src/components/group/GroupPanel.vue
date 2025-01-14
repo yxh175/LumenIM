@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import 'md-editor-v3/lib/style.css'
-import { reactive, computed, watch, ref, onMounted } from 'vue'
-import { NPopover, NPopconfirm } from 'naive-ui'
 import { useUserStore } from '@/store'
 import GroupLaunch from './GroupLaunch.vue'
 import GroupManage from './manage/index.vue'
@@ -231,7 +229,7 @@ onMounted(() => {
           <div class="avatar flex-center">
             <im-avatar :size="35" :src="item.avatar" :username="item.nickname" />
           </div>
-          <p class="text-ellipsis">{{ item.nickname }}马拉喀什吗发啦麻烦卡了</p>
+          <p class="text-ellipsis">{{ item.nickname }}</p>
         </div>
 
         <div class="member-item" @click="isShowGroup = true">
@@ -262,10 +260,10 @@ onMounted(() => {
           <div class="block">
             <div class="title text-ellipsis">群公告</div>
             <div class="text">
-              <!-- <n-button type="primary" text> 编辑 </n-button> -->
+              <!-- <n-button type="primary" text> 更新于 12/13 12:23 </n-button> -->
             </div>
           </div>
-          <div class="describe">
+          <div>
             <p v-if="!detail.notice.length">暂无公告</p>
 
             <MdPreview

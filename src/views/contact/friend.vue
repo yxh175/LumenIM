@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue'
-import { NSpace, NTabs, NTab, NDropdown, NVirtualList } from 'naive-ui'
 import { Search, Plus, Male, Female } from '@icon-park/vue-next'
 import UserSearchModal from './inner/UserSearchModal.vue'
 import GroupManage from './inner/GroupManage.vue'
@@ -10,7 +8,7 @@ import { useEventBus, useContact } from '@/hooks'
 import { ContactConst } from '@/constant/event-bus'
 import { useTalkStore } from '@/store'
 import { useRouter } from 'vue-router'
-import Dropdown from '@/components/base/Dropdown.vue'
+import Dropdown from '@/components/basic/Dropdown.vue'
 
 const router = useRouter()
 const talkStore = useTalkStore()

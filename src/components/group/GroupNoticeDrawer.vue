@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import 'md-editor-v3/lib/style.css'
-import { ref, watch } from 'vue'
-import { NDrawer, NDrawerContent, NEmpty, NFloatButton } from 'naive-ui'
 import { ServeGroupDetail, ServeEditGroupNotice } from '@/api/group'
 import { toApi } from '@/api'
 import { MdPreview, MdEditor } from 'md-editor-v3'
@@ -75,7 +73,7 @@ const onSave = async () => {
     show-mask="transparent"
     :width="400"
     :style="{ padding: 0, borderRadius: 0 }"
-    to="#drawer-container2"
+    to="#drawer-container"
   >
     <n-drawer-content
       :body-content-style="{ padding: 0 }"
@@ -90,11 +88,6 @@ const onSave = async () => {
 
         <template v-else>
           <div style="padding: 0px; height: 100%">
-            <p v-if="!isEditorMode" class="text-center">
-              <b>{{ detail.modify_user_name }}</b> 最后更新于
-              {{ detail.updated_at.substring(0, 16) }} 分
-            </p>
-
             <MdPreview
               preview-theme="vuepress"
               :show-code-row-number="false"
@@ -145,17 +138,4 @@ const onSave = async () => {
   </n-drawer>
 </template>
 
-<style lang="less" scoped>
-.text-center {
-  text-align: center;
-  background-color: #ffffff;
-  margin: 0 auto;
-  color: #333;
-  height: 50px;
-  line-height: 80px;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-  user-select: none;
-  font-size: 14px;
-}
-</style>
+<style lang="less" scoped></style>

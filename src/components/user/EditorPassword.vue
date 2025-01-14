@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { NModal, NForm, NFormItem, NInput, NButton } from 'naive-ui'
 import { ServeUpdatePassword } from '@/api/user'
 import { toApi } from '@/api'
+import { rsaEncrypt } from '@/utils/rsa'
 
 const model = defineModel({ default: false })
 
@@ -47,8 +46,8 @@ const onSubmit = async () => {
   await toApi(
     ServeUpdatePassword,
     {
-      old_password: state.old_password,
-      new_password: state.new_password
+      old_password: rsaEncrypt(state.old_password),
+      new_password: rsaEncrypt(state.new_password)
     },
     {
       loading,

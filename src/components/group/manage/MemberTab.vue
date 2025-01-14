@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ref, computed, reactive, nextTick, onMounted } from 'vue'
-import { NSpace, NDropdown, NCheckbox } from 'naive-ui'
 import { Search, Plus } from '@icon-park/vue-next'
 import GroupLaunch from '../GroupLaunch.vue'
 import { useUserStore } from '@/store'
@@ -367,7 +365,7 @@ onMounted(() => {
               <!-- <span class="badge qiye">企业</span> -->
             </p>
           </div>
-          <div class="item-text text-ellipsis">{{ item.motto || '暂无简介' }}.....</div>
+          <div class="item-text text-ellipsis">{{ item.motto || '...' }}</div>
         </div>
       </div>
     </main>

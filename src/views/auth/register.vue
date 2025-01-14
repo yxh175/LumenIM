@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { NForm, NFormItem, NInput } from 'naive-ui'
 import { ServeRegister } from '@/api/auth'
 import { toApi } from '@/api'
 import { ServeSendVerifyCode } from '@/api/common'
 import { isMobile } from '@/utils/validate'
 import { useSmsLock } from '@/hooks'
+import { rsaEncrypt } from '@/utils/rsa'
 
 // 初始化短信按钮锁
 const { lockTime, start } = useSmsLock('REGISTER_SMS', 60)
@@ -59,7 +57,7 @@ const onRegister = async () => {
     {
       nickname: model.nickname,
       mobile: model.username,
-      password: model.password,
+      password: rsaEncrypt(model.password),
       sms_code: model.sms_code,
       platform: 'web'
     },

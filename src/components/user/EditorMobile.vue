@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { NModal, NForm, NFormItem, NInput } from 'naive-ui'
 import { ServeUpdateMobile } from '@/api/user'
 import { toApi } from '@/api'
 import SmsLock from '@/plugins/sms-lock'
 import { isMobile } from '@/utils/validate'
 import { ServeSendVerifyCode } from '@/api/common'
 import { useInject } from '@/hooks'
+import { rsaEncrypt } from '@/utils/rsa'
 
 const emit = defineEmits(['success'])
 
@@ -71,17 +70,19 @@ const onSendSms = async () => {
 }
 
 const onSubmit = async () => {
-  await toApi(
-    ServeUpdateMobile,
-    { ...state },
-    {
-      loading,
-      showMessageText: '手机号修改成功',
-      onSuccess: () => {
-        emit('success', state.mobile)
-      }
+  const params = {
+    mobile: state.mobile,
+    sms_code: state.sms_code,
+    password: rsaEncrypt(state.password)
+  }
+
+  await toApi(ServeUpdateMobile, params, {
+    loading,
+    showMessageText: '手机号修改成功',
+    onSuccess: () => {
+      emit('success', state.mobile)
     }
-  )
+  })
 }
 
 const onValidate = (e: any) => {
