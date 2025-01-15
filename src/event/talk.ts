@@ -118,7 +118,7 @@ class Talk extends Base {
    */
   showMessageNocice() {
     // 是我自己发送的消息不提醒
-    if (this.from_id == this.getAccountId()) return
+    if (this.sender_id == this.getAccountId()) return
 
     const notification = new Notification('LumenIM 在线聊天', {
       dir: 'auto',

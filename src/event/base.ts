@@ -14,14 +14,14 @@ class Base {
     return useUserStore().uid
   }
 
-  getTalkParams(): { talk_type: number; receiver_id: any; index_name: string } {
+  getTalkParams(): { talk_mode: number; receiver_id: any; index_name: string } {
     const dialogueStore = useDialogueStore()
 
-    const { talk_mode, to_from_id } = dialogueStore.target
+    const { talk_mode, receiver_id } = dialogueStore.target
 
     return {
       talk_mode,
-      to_from_id,
+      receiver_id,
       index_name: dialogueStore.index_name
     }
   }
@@ -35,7 +35,7 @@ class Base {
   isTalk(talk_mode: number, to_from_id: string): boolean {
     const params = this.getTalkParams()
 
-    return params.to_from_id == to_from_id && talk_mode == params.talk_mode
+    return params.receiver_id == to_from_id && talk_mode == params.talk_mode
   }
 
   /**

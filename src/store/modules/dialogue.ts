@@ -29,7 +29,7 @@ export const useDialogueStore = defineStore('dialogue', {
       target: {
         username: '',
         talk_mode: 0, // 对话来源[1:私聊;2:群聊]
-        to_from_id: 0
+        receiver_id: 0
       },
 
       // 好友是否正在输入文字
