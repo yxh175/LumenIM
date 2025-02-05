@@ -44,8 +44,15 @@ class Talk extends Base {
     const { conversation_id, sender_id, talk_mode, body } = data
 
     Object.assign(this, { sender_id, conversation_id, talk_mode, body })
-    body.extra = JSON.parse(body.extra)
-    body.quote = JSON.parse(body.quote)
+     // 只有在 body.extra 是字符串时才进行解析
+     if (typeof body.extra === 'string') {
+      body.extra = JSON.parse(body.extra)
+    }
+
+    // 只有在 body.quote 是字符串时才进行解析
+    if (typeof body.quote === 'string') {
+        body.quote = JSON.parse(body.quote)
+    }
 
     this.handle()
   }
@@ -204,6 +211,8 @@ class Talk extends Base {
    * 更新对话列表记录
    */
   updateTalkItem() {
+    console.log("is sender")
+    console.log(this.isCurrSender())
     useTalkStore().updateMessage(
       {
         index_name: this.getIndexName(),

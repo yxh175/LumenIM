@@ -40,8 +40,10 @@ export function useTalkRecord() {
       }
 
       data.items.map((item: any) => {
-        item.extra = JSON.parse(item.extra || '{}')
-        item.quote = JSON.parse(item.quote || '{}')
+        item.extra
+        item.quote
+        // item.extra = JSON.parse(item.extra || '{}')
+        // item.quote = JSON.parse(item.quote || '{}')
       })
 
       dialogueStore.unshiftDialogueRecord(data.items.reverse())
