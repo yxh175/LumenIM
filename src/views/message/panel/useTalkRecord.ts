@@ -16,7 +16,7 @@ export function useTalkRecord() {
 
     const request = {
       talk_mode: talk.talk_mode,
-      to_from_id: talk.to_from_id,
+      to_from_id: talk.receiver_id,
       cursor: cursor,
       limit: 30
     }
@@ -25,7 +25,7 @@ export function useTalkRecord() {
       console.log('Loading talk records with request:', request)
       const { code, data, message } = await toApi(ServeTalkRecords, request)
 
-      if (request.talk_mode !== talk.talk_mode || request.to_from_id !== talk.to_from_id) {
+      if (request.talk_mode !== talk.talk_mode || request.to_from_id !== talk.receiver_id) {
         console.error('Talk mode or to_from_id changed')
         throw new Error('Talk mode or to_from_id changed')
       }

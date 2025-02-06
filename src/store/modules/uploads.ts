@@ -46,7 +46,7 @@ export const useUploadsStore = defineStore('uploads', {
     },
 
     // 初始化上传
-    async initUploadFile(file: File, talkType: number, receiverId: number, username: string) {
+    async initUploadFile(file: File, talkType: number, receiverId: string, username: string) {
       const { code, data } = await toApi(ServeFindFileSplitInfo, {
         file_name: file.name,
         file_size: file.size

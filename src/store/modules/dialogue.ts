@@ -29,7 +29,7 @@ export const useDialogueStore = defineStore('dialogue', {
       target: {
         username: '',
         talk_mode: 0, // 对话来源[1:私聊;2:群聊]
-        receiver_id: 0
+        receiver_id: ''
       },
 
       // 好友是否正在输入文字
@@ -61,7 +61,7 @@ export const useDialogueStore = defineStore('dialogue', {
       this.target = {
         username: data.remark || data.name,
         talk_mode: data.talk_mode,
-        to_from_id: data.to_from_id
+        receiver_id: data.to_from_id
       }
 
       this.index_name = `${data.talk_mode}_${data.to_from_id}`
@@ -80,11 +80,11 @@ export const useDialogueStore = defineStore('dialogue', {
 
     // 更新提及列表
     async updateGroupMembers() {
-      const { to_from_id } = this.target
+      const { receiver_id } = this.target
 
       this.members = []
       const { code, data } = await toApi(ServeGetGroupMembers, {
-        group_id: to_from_id
+        group_id: receiver_id
       })
 
       if (code != 200) return
@@ -153,7 +153,7 @@ export const useDialogueStore = defineStore('dialogue', {
     async ApiDeleteRecord(msgIds: string[]) {
       const { code } = await toApi(ServeRemoveRecords, {
         talk_mode: this.target.talk_mode,
-        to_from_id: this.target.to_from_id,
+        to_from_id: this.target.receiver_id,
         msg_ids: msgIds
       })
 
@@ -164,7 +164,7 @@ export const useDialogueStore = defineStore('dialogue', {
     async ApiRevokeRecord(msg_id: string) {
       const { code } = await toApi(ServeRevokeRecords, {
         talk_mode: this.target.talk_mode,
-        to_from_id: this.target.to_from_id,
+        to_from_id: this.target.receiver_id,
         msg_id
       })
 

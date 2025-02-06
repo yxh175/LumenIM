@@ -15,8 +15,8 @@ const props = defineProps({
     default: 0
   },
   toFromId: {
-    type: Number,
-    default: 0
+    type: String,
+    default: ''
   }
 })
 const chat = useTemplateRef('chat')
