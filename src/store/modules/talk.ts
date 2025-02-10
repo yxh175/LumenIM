@@ -113,7 +113,7 @@ export const useTalkStore = defineStore('talk', {
       })
     },
 
-    async toTalk(talk_mode: number, to_from_id: number, router: any) {
+    async toTalk(talk_mode: number, to_from_id: string, router: any) {
       const indexName = `${talk_mode}_${to_from_id}`
       const route = {
         path: '/message',

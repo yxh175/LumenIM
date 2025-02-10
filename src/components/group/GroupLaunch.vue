@@ -7,13 +7,13 @@ import { NAvatar, TransferRenderTargetLabel } from 'naive-ui'
 const { message } = useInject()
 
 const props = defineProps<{
-  groupId: number
+  groupId: string
 }>()
 
 const emit = defineEmits<{
   close: []
-  onInvite: [groupId: number]
-  onSubmit: [groupId: number, groupName: string]
+  onInvite: [groupId: string]
+  onSubmit: [groupId: string, groupName: string]
 }>()
 
 const mapData = new Map()
@@ -117,7 +117,7 @@ const onInviteSubmit = async (user_ids: number[]) => {
 const onSubmit = () => {
   const ids = values.value.map((value) => value)
 
-  if (props.groupId == 0) {
+  if (props.groupId == '') {
     onCreateSubmit(ids)
   } else {
     onInviteSubmit(ids)
@@ -133,7 +133,7 @@ onMounted(() => {
   <n-modal
     v-model:show="isShowBox"
     preset="card"
-    :title="groupId === 0 ? '创建群聊' : '邀请好友'"
+    :title="groupId === '' ? '创建群聊' : '邀请好友'"
     class="modal-radius"
     style="max-width: 650px"
     :on-after-leave="close"
@@ -142,7 +142,7 @@ onMounted(() => {
     <section class="launch-box" style="padding: 10px">
       <n-input
         class="group-name"
-        v-show="groupId === 0"
+        v-show="groupId === ''"
         placeholder="请填写群名称(必填)"
         maxlength="20"
         show-count

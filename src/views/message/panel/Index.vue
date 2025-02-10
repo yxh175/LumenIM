@@ -70,7 +70,7 @@ const isShowGroupAside = ref(false)
 const isShowGroupNoticeAside = ref(false)
 
 const showGroupLaunch = ref({
-  groupId: 0,
+  groupId: '',
   isShowGroupLaunch: false
 })
 
@@ -79,7 +79,7 @@ const events = {
     isShowGroupAside.value = !isShowGroupAside.value
   },
   addGroup: () => {
-    showGroupLaunch.value.groupId = 0
+    showGroupLaunch.value.groupId = ''
 
     if (talkParams.talkMode === TalkModeEnum.Group) {
       showGroupLaunch.value.groupId = talkParams.toFromId
@@ -241,7 +241,7 @@ onUnmounted(() => {
     :group-id="showGroupLaunch.groupId"
     @close="showGroupLaunch.isShowGroupLaunch = false"
     @on-submit="
-      (groupId: number) => {
+      (groupId: string) => {
         talkStore.toTalk(TalkModeEnum.Group, groupId, router)
       }
     "

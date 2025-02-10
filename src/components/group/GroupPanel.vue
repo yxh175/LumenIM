@@ -21,8 +21,8 @@ const { toShowUserInfo } = useInject()
 const emit = defineEmits(['close', 'to-talk'])
 const props = defineProps({
   groupId: {
-    type: Number,
-    default: 0
+    type: String,
+    default: ''
   }
 })
 

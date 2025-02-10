@@ -9,7 +9,7 @@ const emit = defineEmits(['close'])
 
 defineProps({
   groupId: {
-    type: Number,
+    type: String,
     default: 0
   }
 })

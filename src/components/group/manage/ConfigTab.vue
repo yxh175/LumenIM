@@ -5,7 +5,7 @@ import { toApi } from '@/api'
 const emit = defineEmits(['close'])
 const props = defineProps({
   groupId: {
-    type: Number,
+    type: String,
     default: 0
   }
 })

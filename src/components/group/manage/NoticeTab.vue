@@ -9,8 +9,8 @@ import { ServeUploadImage } from '@/api/upload'
 
 const props = defineProps({
   groupId: {
-    type: Number,
-    default: 0
+    type: String,
+    default: ''
   }
 })
 

@@ -1,5 +1,5 @@
-<script lang="ts" setup>
 import { Search, CheckSmall, Close } from '@icon-park/vue-next'
+<script lang="ts" setup>
 import { ServeGetGroupApplyList, ServeDeleteGroupApply, ServeAgreeGroupApply } from '@/api/group'
 import { toApi } from '@/api'
 import { throttle } from '@/utils/common'
@@ -20,7 +20,7 @@ const emit = defineEmits(['close'])
 
 const props = defineProps({
   groupId: {
-    type: Number,
+    type: String,
     default: 0
   }
 })
