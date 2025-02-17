@@ -203,10 +203,10 @@ function render(extra: any, message: ITalkRecord, role: string) {
   return components[msgType]?.(extra, message, role) || <unknown-message msgType={msgType} />
 }
 
-export const formatChatMessage = (loginUserId: number, chat: ITalkRecord): IMessage => {
-  const { msg_id, from_id, send_time, nickname, avatar, extra } = chat
+export const formatChatMessage = (loginUserId: string, chat: ITalkRecord): IMessage => {
+  const { msg_id, user_id, send_time, nickname, avatar, extra } = chat
 
-  if (from_id == 0 || chat.msg_type >= 1000) {
+  if (user_id == '' || chat.msg_type >= 1000) {
     return {
       msg_id: msg_id,
       role: RoleEnum.SYSTEM,
@@ -227,8 +227,10 @@ export const formatChatMessage = (loginUserId: number, chat: ITalkRecord): IMess
       status: StatusEnum.SENT
     }
   }
+  console.log("loginUserId: ", loginUserId)
+  console.log("userId: ", user_id)
 
-  const role = from_id != loginUserId ? RoleEnum.ASSISTANT : RoleEnum.USER
+  const role = user_id != loginUserId ? RoleEnum.ASSISTANT : RoleEnum.USER
 
   const quote = chat?.quote
     ? {

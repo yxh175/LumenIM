@@ -24,7 +24,7 @@ export function useContextMenu(chat: any) {
     // 仅支持2分钟内的消息撤回
     if (
       Date.now() - new Date(item.send_time).getTime() < 2 * 60 * 1000 &&
-      item.from_id === userStore.uid
+      item.user_id === userStore.uid
     ) {
       // 目前仅支持自己发送的消息才能撤回
       options.push({ label: '撤回', key: 'revoke' })
@@ -187,7 +187,7 @@ export function useContextMenu(chat: any) {
 
     dialogueStore.ApiForwardRecord({
       talk_mode: dialogueStore.target.talk_mode,
-      to_from_id: dialogueStore.target.to_from_id,
+      to_from_id: dialogueStore.target.receiver_id,
       body: {
         action: mode == 'merge' ? 2 : 1,
         msg_ids: chat.value?.getMultiSelect(),

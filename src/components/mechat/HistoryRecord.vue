@@ -21,7 +21,7 @@ const props = defineProps({
 })
 const chat = useTemplateRef('chat')
 
-const customMessageRender = (item: any) => formatChatMessage(2054, item)
+const customMessageRender = (item: any) => formatChatMessage("2054", item)
 
 const model = reactive({
   cursor: 0,

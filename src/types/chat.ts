@@ -31,7 +31,7 @@ export interface ITalkRecord {
   msg_id: string // 消息ID
   sequence: number // 消息时序ID（消息排序）
   msg_type: number // 消息类型
-  from_id: number // 发送者id
+  user_id: string // 发送者id
   nickname: string // 昵称
   avatar: string // 头像
   is_revoked: number // 是否撤回

@@ -30,7 +30,7 @@ const onMaskClick = () => {
  * 自定义消息渲染器
  * @param item
  */
-const customMessageRender = (item: any) => formatChatMessage(0, item)
+const customMessageRender = (item: any) => formatChatMessage("0", item)
 
 const loadChatRecord = async () => {
   const { code, data } = await toApi(
